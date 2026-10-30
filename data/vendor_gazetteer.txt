@@ -1,0 +1,153 @@
+# =============================================================================
+# ReproBench vendor gazetteer
+# =============================================================================
+# Plain-text, pipe-delimited record file. Blank lines and lines beginning with
+# '#' are ignored. Every record is a single line; fields are separated by '|'
+# and list-valued fields are comma-separated.
+#
+# Record types
+# ------------
+#   VENDOR|<canonical>|<aliases>|<products>
+#       canonical : the single spelling used in data/cves.yaml `vendor:` fields.
+#       aliases   : alternative spellings / legal names / CJK names seen in
+#                   advisories, blogs, and agent output (used for fuzzy
+#                   matching in P1.4 `vendor_and_product`).
+#       products  : product families associated with this benchmark's CVEs.
+#
+#   PRODUCT|<vendor>|<product>|<aliases>
+#       One line per product family named in Table 3. `aliases` covers model
+#       spellings used by the vendor (e.g. "AC15" vs "Archer C50"), so the
+#       P1.4 predicate can accept any of them.
+#
+#   HOST|<vendor>|<host>|<kind>
+#       Firmware download / support hosts. Consumed by dataset/filters.py
+#       (filter F1: "firmware URL reachable / known mirror") and by
+#       profile/sources.py when locating an official firmware image.
+#       kind in {official, support_portal, download_portal, legacy_ftp}.
+#
+#   CLASS_ALIAS|<class>|<phrase>
+#       Phrases that name a vulnerability class in prose. Used only as a
+#       hint when mapping agent text onto {BOF, CMDI, AUTH}; authoritative
+#       CWE->class mapping lives in config/phases.yaml `classes:`.
+#
+# Counts (machine-checkable; see tests and scripts/verify_claims.py)
+#   VENDOR_COUNT=14
+#   PRODUCT_COUNT=41
+# =============================================================================
+
+# --- vendors (14) ------------------------------------------------------------
+VENDOR|Tenda|tenda,shenzhen tenda,深圳市吉祥腾达科技有限公司,腾达|AC6,AC9,AC15,AC18,AC10,AC500
+VENDOR|NETGEAR|netgear,netgear inc,netgear technologies,网件|R6700,R7800,Orbi,RAX,AC1750
+VENDOR|ASUS|asus,asustek,asus computer,华硕,rt-ax56u,gt-ac2900|RT-AX56U,GT-AC2900,RT-AC,RT-AX
+VENDOR|TP-Link|tp-link,tplink,tp link,普联,普联技术|TL-WR940N,Archer AX21,Archer AX,WA850RE,Tapo
+VENDOR|D-Link|d-link,dlink,d link,友讯,友讯科技|DIR-3040,DIR-X3260,DIR-2640,DAP-1650,G416,G403,G415
+VENDOR|Linksys|linksys,belkin linksys,贝尔金|E1200,E-Series,E5350,EA,MR
+VENDOR|Ubiquiti|ubiquiti,ubiquiti networks,ubnt,优比快|UniFi Protect,UniFi,EdgeMax,AirMax
+VENDOR|Zyxel|zyxel,zyxel communications,合勤,合勤科技|GS1900,USG FLEX,USG,NBG,VMG
+VENDOR|Grandstream|grandstream,grandstream networks,潮流网络|HT800,HT8xx,GXP,GRP
+VENDOR|Xiaomi|xiaomi,mi,小米,北京小米科技有限责任公司|AX9000,Mi Router,Redmi Router
+VENDOR|Reolink|reolink,reolink innovation,睿联|Doorbell,RLK,RLC
+VENDOR|ALTICE|altice,sfr,altice-sfr,altice labs,sagemcom,法国电信|GR140DG,GR140,F@st
+VENDOR|Dahua|dahua,dahua technology,大华,浙江大华技术股份有限公司|IPC-HDBW,IPC,NVR,XVR
+VENDOR|MikroTik|mikrotik,mikrotikls,routeros,mikrotik routeros|RouterOS,RouterBOARD,RB,CCR
+
+# --- products named in Table 3 (41) ------------------------------------------
+PRODUCT|Tenda|AC6|ac6,ac6 v2,ac6 v3
+PRODUCT|Tenda|AC9|ac9,ac9 v1,ac9 v2,ac9 v3
+PRODUCT|Tenda|AC15|ac15,ac15 v1,ac15 v2,ac15 v3
+PRODUCT|Tenda|AC18|ac18,ac18 v1
+PRODUCT|NETGEAR|R6700|r6700,r6700 v1,r6700 v2,r6700 v3,nighthawk r6700
+PRODUCT|NETGEAR|R7800|r7800,nighthawk x4s r7800,nighthawk r7800
+PRODUCT|NETGEAR|Orbi|orbi,rbr,orbir,rbk,orbi wifi system
+PRODUCT|ASUS|RT-AX56U|rt-ax56u,rt ax56u,ax56u
+PRODUCT|ASUS|GT-AC2900|gt-ac2900,gt ac2900,rog rapture gt-ac2900
+PRODUCT|TP-Link|TL-WR940N|tl-wr940n,wr940n,tl wr940n
+PRODUCT|TP-Link|Archer AX21|archer ax21,ax21,archer ax
+PRODUCT|TP-Link|WA850RE|wa850re,tl-wa850re,re450
+PRODUCT|D-Link|DIR-3040|dir-3040,dir3040
+PRODUCT|D-Link|DIR-X3260|dir-x3260,dirx3260
+PRODUCT|D-Link|DIR-2640|dir-2640,dir2640
+PRODUCT|D-Link|DAP-1650|dap-1650,dap1650
+PRODUCT|D-Link|G416|g416,d-link g416
+PRODUCT|D-Link|G403|g403,d-link g403
+PRODUCT|D-Link|G415|g415,d-link g415
+PRODUCT|Linksys|E1200|e1200,e1200v2,e1200 v2
+PRODUCT|Linksys|E-Series|e-series,e series,e900,e1200,e2500
+PRODUCT|Linksys|E5350|e5350,e5350v1
+PRODUCT|Ubiquiti|UniFi Protect|unifi protect,unifi-protect,protect,unvr,unifi nvr
+PRODUCT|Zyxel|GS1900|gs1900,gs1900-8,gs1900-10hp,gs1900 series
+PRODUCT|Zyxel|USG FLEX|usg flex,usg-flex,usg20w,usg40,zywall usg flex
+PRODUCT|Grandstream|HT800|ht800,ht-800,ht8xx,ht812,ht814
+PRODUCT|Xiaomi|AX9000|ax9000,mi ax9000,xiaomi router ax9000
+PRODUCT|Reolink|Doorbell|doorbell,reolink doorbell,video doorbell,doorbell poe
+PRODUCT|ALTICE|GR140DG|gr140dg,gr140,sfr gr140dg,altice gr140dg
+PRODUCT|Dahua|IPC-HDBW|ipc-hdbw,ipc hdbw,dahua ipc
+PRODUCT|Dahua|IPC|ipc,ipc-hx,ipc-hdw
+PRODUCT|MikroTik|RouterOS|routeros,router os,mikrotik routeros
+PRODUCT|MikroTik|RouterBOARD|routerboard,rb,ccr
+
+# --- firmware download / support hosts (filter F1: known mirror) -------------
+HOST|Tenda|www.tenda.com.cn|official
+HOST|Tenda|www.tendacn.com|official
+HOST|Tenda|static.tenda.com.cn|download_portal
+HOST|NETGEAR|www.netgear.com|official
+HOST|NETGEAR|kb.netgear.com|support_portal
+HOST|NETGEAR|downloads.netgear.com|download_portal
+HOST|ASUS|www.asus.com|official
+HOST|ASUS|dlcdnets.asus.com|download_portal
+HOST|ASUS|dlcdn.asus.com|download_portal
+HOST|TP-Link|www.tp-link.com|official
+HOST|TP-Link|static.tp-link.com|download_portal
+HOST|TP-Link|www.tp-link.com.cn|official
+HOST|D-Link|support.dlink.com|support_portal
+HOST|D-Link|ftp.dlink.com|legacy_ftp
+HOST|D-Link|tsd.dlink.com.tw|download_portal
+HOST|Linksys|www.linksys.com|official
+HOST|Linksys|downloads.linksys.com|download_portal
+HOST|Linksys|support.linksys.com|support_portal
+HOST|Ubiquiti|www.ui.com|official
+HOST|Ubiquiti|dl.ui.com|download_portal
+HOST|Ubiquiti|dl.ubnt.com|legacy_ftp
+HOST|Zyxel|www.zyxel.com|official
+HOST|Zyxel|download.zyxel.com|download_portal
+HOST|Zyxel|ftp.zyxel.com|legacy_ftp
+HOST|Grandstream|www.grandstream.com|official
+HOST|Grandstream|firmware.grandstream.com|download_portal
+HOST|Xiaomi|www.mi.com|official
+HOST|Xiaomi|cdn.cnbj1.fds.api.mi-img.com|download_portal
+HOST|Xiaomi|mirom.ezbox.idv.tw|legacy_ftp
+HOST|Reolink|reolink.com|official
+HOST|Reolink|home-cdn.reolink.us|download_portal
+HOST|ALTICE|www.altice.pt|official
+HOST|ALTICE|www.sagemcom.com|official
+HOST|Dahua|www.dahuasecurity.com|official
+HOST|Dahua|www.dahuatech.com|official
+HOST|MikroTik|mikrotik.com|official
+HOST|MikroTik|download.mikrotik.com|download_portal
+
+# --- class phrasing hints (not authoritative; see config/phases.yaml) --------
+CLASS_ALIAS|BOF|buffer overflow
+CLASS_ALIAS|BOF|stack overflow
+CLASS_ALIAS|BOF|heap overflow
+CLASS_ALIAS|BOF|out-of-bounds write
+CLASS_ALIAS|BOF|memory corruption
+CLASS_ALIAS|BOF|strcpy
+CLASS_ALIAS|BOF|sprintf
+CLASS_ALIAS|CMDI|command injection
+CLASS_ALIAS|CMDI|os command injection
+CLASS_ALIAS|CMDI|shell injection
+CLASS_ALIAS|CMDI|command execution
+CLASS_ALIAS|CMDI|system call injection
+CLASS_ALIAS|CMDI|diagnostic command
+CLASS_ALIAS|AUTH|authentication bypass
+CLASS_ALIAS|AUTH|auth bypass
+CLASS_ALIAS|AUTH|improper authentication
+CLASS_ALIAS|AUTH|missing authentication
+CLASS_ALIAS|AUTH|hard-coded credentials
+CLASS_ALIAS|AUTH|default credentials
+CLASS_ALIAS|AUTH|session token forgery
+CLASS_ALIAS|AUTH|authorization bypass
+
+# --- sentinels ---------------------------------------------------------------
+VENDOR|Unknown|unknown,unidentified,n/a,na,not stated,generic oem|Unknown
+# END

@@ -1,0 +1,55 @@
+# ReproBench — runtime + development requirements
+# Python 3.11+
+#
+# Install:
+#   pip install -r requirements.txt
+#   pip install -e .            # after the package skeleton exists (pyproject.toml)
+#
+# Nothing in this file is required for the offline self-test
+# (scripts/selftest_offline.sh) beyond the core scientific stack: the offline path
+# uses the ReplayHarness + deterministic heuristic judge and never touches the
+# network.  The optional extras at the bottom are only needed for live runs.
+
+# --- core data model -------------------------------------------------------
+pydantic>=2.6,<3
+pydantic-settings>=2.2
+
+# --- CLI -------------------------------------------------------------------
+typer>=0.12
+rich>=13.7
+
+# --- config / templating ---------------------------------------------------
+PyYAML>=6.0.1
+Jinja2>=3.1.3
+
+# --- network (dataset mining, profile fetch, model adapters) ---------------
+httpx>=0.27
+tenacity>=8.2.3
+
+# --- artifact / evidence inspection ---------------------------------------
+python-magic>=0.4.27          # requires the system libmagic1 package
+pyelftools>=0.31
+
+# --- analysis / table + figure emission -----------------------------------
+pandas>=2.2
+numpy>=1.26
+matplotlib>=3.8
+
+# --- testing ---------------------------------------------------------------
+pytest>=8.1
+pytest-cov>=5.0
+
+# ---------------------------------------------------------------------------
+# OPTIONAL EXTRAS (not installed by default; `pip install -e ".[live]"`)
+# ---------------------------------------------------------------------------
+# openai>=1.30                # OpenAI-compatible judge / agent fallback
+# anthropic>=0.25             # Anthropic judge
+#
+# System packages (not pip):
+#   libmagic1                  # python-magic backend
+#   docker >= 24               # one container per run (--rm, /output + /trace mounts)
+#   opencode CLI               # npm install -g @opencode/cli  (agent scaffold)
+#   qemu-user-static, qemu-system-arm, qemu-system-aarch64, binwalk,
+#   squashfs-tools, binutils, gdb-multiarch, strace, netcat-openbsd, tcpdump,
+#   ubireader-ng, jefferson, sasquatch, file, curl, wget, git
+#   -> baked into docker/agent.Dockerfile (FROM ubuntu:24.04)
